@@ -8,7 +8,7 @@
     "lint": "eslint src/**",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
-  "author": "Xavier Decuyper <hi@savjee.be>",
+  "author": "Douglas Suarez Agreda",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -24,7 +24,9 @@
     "discovery-swarm": "^5.1.4",
     "elliptic": "^6.4.1",
     "get-port": "^4.2.0",
-    "portfinder": "^1.0.20"
+    "js-sha3": "^0.8.0",
+    "portfinder": "^1.0.20",
+    "sha3": "^2.0.1"
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
