@@ -1,0 +1,40 @@
+{
+  "name": "criptocurrenci",
+  "version": "1.0.0",
+  "description": "Simple Blockchain implementation in Javascript. For educational purposes only, to use a virtual currenci and inprove  a model of segurity for the Blockchain.",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "mocha tests/*.test.js",
+    "lint": "eslint src/**",
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+  },
+  "author": "Xavier Decuyper <hi@savjee.be>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hellsant/criptoCurrenci"
+  },
+  "bugs": {
+    "url": "https://github.com/hellsant/criptoCurrenci/issues"
+  },
+  "homepage": "https://github.com/hellsant/criptoCurrenci",
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "dat-swarm-defaults": "^1.0.2",
+    "discovery-swarm": "^5.1.4",
+    "elliptic": "^6.4.1",
+    "get-port": "^4.2.0",
+    "portfinder": "^1.0.20"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.2",
+    "eslint": "^5.7.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0"
+  }
+}
