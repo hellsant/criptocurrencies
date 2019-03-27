@@ -4,7 +4,7 @@ const { Block } = require("./Block");
 class Blockchain {
   constructor() {
     this.chain = [this.createGenesisBlock()];
-    this.difficulty = 2;
+    this.difficulty = 3;
     this.pendingTransactions = [];
     this.miningReward = 100;
   }
@@ -12,7 +12,7 @@ class Blockchain {
    * @returns {Block}
    */
   createGenesisBlock() {
-    return new Block(Date.parse('2019-01-01'), [], '0');
+    return new Block(0, Date.parse('2019-01-01'), [], '0');
   }
   /**
    * Returns the latest block on our chain. Useful when you want to create a
@@ -23,6 +23,7 @@ class Blockchain {
   getLatestBlock() {
     return this.chain[this.chain.length - 1];
   }
+
   /**
    * Takes all the pending transactions, puts them in a Block and starts the
    * mining process. It also adds a transaction to send the mining reward to
@@ -33,12 +34,13 @@ class Blockchain {
   minePendingTransactions(miningRewardAddress) {
     const rewardTx = new Transaction(null, miningRewardAddress, this.miningReward);
     this.pendingTransactions.push(rewardTx);
-    let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
+    const lastBlock = this.getLatestBlock();
+    let block = new Block(lastBlock.index + 1, Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
     block.mineBlock(this.difficulty);
-    console.log('Block successfully mined');
     this.chain.push(block);
     this.pendingTransactions = [];
   }
+
   /**
    * Add a new transaction to the list of pending transactions (to be added
    * next time the mining process starts). This verifies that the given
@@ -56,6 +58,7 @@ class Blockchain {
     }
     this.pendingTransactions.push(transaction);
   }
+
   /**
    * Returns the balance of a given wallet address.
    *
@@ -76,6 +79,7 @@ class Blockchain {
     }
     return balance;
   }
+  
   /**
    * Returns a list of all transactions that happened
    * to and from the given wallet address.
@@ -94,6 +98,7 @@ class Blockchain {
     }
     return txs;
   }
+
   /**
    * Loops over all the blocks in the chain and verify if they are properly
    * linked together and nobody has tampered with the hashes. By checking
@@ -126,6 +131,10 @@ class Blockchain {
     }
     console.log('data mining correct');
     return true;
+  }
+
+  print() {
+    this.chain.forEach((block) => console.log(`${JSON.stringify(block)} \n`));
   }
 }
 

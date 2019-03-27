@@ -6,22 +6,25 @@ class Block {
    * @param {Transaction[]} transactions
    * @param {string} previousHash
    */
-  constructor(timestamp, transactions, previousHash = '') {
+  constructor(index,timestamp, transactions, previousHash = '') {
+    this.index=index;
     this.previousHash = previousHash;
     this.timestamp = timestamp;
     this.transactions = transactions;
     this.nonce = 0;
     this.hash = this.calculateHash();
   }
+
   /**
-   * Returns the SHA256 of this block (by processing all the data stored
+   * Returns the SHA512 of this block (by processing all the data stored
    * inside this block)
    *
    * @returns {string}
    */
   calculateHash() {
-    return SHA512(this.previousHash + this.timestamp + JSON.stringify(this.transactions) + this.nonce).toString();
+    return SHA512( this.index + this.previousHash + this.timestamp + JSON.stringify(this.transactions) + this.nonce).toString();
   }
+  
   /**
    * Starts the mining process on the block. It changes the 'nonce' until the hash
    * of the block starts with enough zeros (= difficulty)
@@ -33,6 +36,7 @@ class Block {
       this.nonce++;
       this.hash = this.calculateHash();
     }
+    console.log(`Block mined loop: ${this.nonce} iterarions`);
     console.log(`Block mined: ${this.hash}`);
   }
   /**

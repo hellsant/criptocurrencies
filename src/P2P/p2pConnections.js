@@ -18,6 +18,7 @@ console.log('Your identity: ' + myId.toString('hex'))
 
 // reference to redline interface
 let rl
+
 /**
  * Function for safely call console.log with readline interface active
  */
@@ -67,10 +68,9 @@ const config = defaults({
  * discovery-swarm library establishes a TCP p2p connection and uses
  * discovery-channel library for peer discovery
  */
-const sw = Swarm(config)
+const sw = Swarm(config); 
 
-
-    ; (async () => {
+(async () => {
 
         // Choose a random unused port for listening TCP peer connections
         const port = await getPort()

@@ -22,8 +22,7 @@ class Transaction {
    * @returns {string}
    */
   calculateHash() {
-    return SHA512(this.fromAddress + this.toAddress + this.amount + this.timestamp)
-      .toString();
+    return SHA512(this.fromAddress + this.toAddress + this.amount + this.timestamp).toString();
   }
  
   /**

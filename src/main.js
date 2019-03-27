@@ -1,4 +1,3 @@
-//const { Blockchain, Transaction } = require('./blockchain');
 const { Blockchain } = require('./blockChains/Blockchain');
 const { Transaction } = require('./transanctions/Transaction');
 const EC = require('elliptic').ec;
@@ -17,7 +16,6 @@ const savjeeCoin = new Blockchain();
 const tx1 = new Transaction(myWalletAddress, 'address2', 100);
 tx1.signTransaction(myKey);
 savjeeCoin.addTransaction(tx1);
-
 // Mine block
 savjeeCoin.minePendingTransactions(myWalletAddress);
 
@@ -25,11 +23,6 @@ savjeeCoin.minePendingTransactions(myWalletAddress);
 const tx2 = new Transaction(myWalletAddress, 'address1', 50);
 tx2.signTransaction(myKey);
 savjeeCoin.addTransaction(tx2);
-
-const tx3 = new Transaction(myWalletAddress, 'address2', 9);
-tx3.signTransaction(myKey);
-savjeeCoin.addTransaction(tx3);
-
 // Mine block
 savjeeCoin.minePendingTransactions(myWalletAddress);
 
@@ -37,8 +30,9 @@ console.log();
 console.log(`Balance of xavier is ${savjeeCoin.getBalanceOfAddress(myWalletAddress)}`);
 
 // Uncomment this line if you want to test tampering with the chain
-// savjeeCoin.chain[1].transactions[0].amount = 10;
+ savjeeCoin.chain[1].transactions[0].amount = 10;
 
 // Check if the chain is valid
 console.log();
 console.log('Blockchain valid?', savjeeCoin.isChainValid() ? 'Yes' : 'No');
+savjeeCoin.print();
