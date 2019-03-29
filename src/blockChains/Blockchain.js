@@ -6,14 +6,16 @@ class Blockchain {
     this.chain = [this.createGenesisBlock()];
     this.difficulty = 3;
     this.pendingTransactions = [];
-    this.miningReward = 100;
+    this.miningReward = 100; //recompensa
   }
+  
   /**
    * @returns {Block}
    */
   createGenesisBlock() {
-    return new Block(0, Date.parse('2019-01-01'), [], '0');
+    return new Block(0, Date.parse('2019-01-01'), "nodo genesis", '0');
   }
+
   /**
    * Returns the latest block on our chain. Useful when you want to create a
    * new Block and you need the hash of the previous Block.
@@ -32,11 +34,14 @@ class Blockchain {
    * @param {string} miningRewardAddress
    */
   minePendingTransactions(miningRewardAddress) {
-    const rewardTx = new Transaction(null, miningRewardAddress, this.miningReward);
+    let rewardTx = new Transaction(null, miningRewardAddress, this.miningReward);
     this.pendingTransactions.push(rewardTx);
-    const lastBlock = this.getLatestBlock();
-    let block = new Block(lastBlock.index + 1, Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
+
+    let block = new Block(this.getLatestBlock().index + 1, Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
     block.mineBlock(this.difficulty);
+    
+    console.log('se minaron las transacciones correctamente');
+
     this.chain.push(block);
     this.pendingTransactions = [];
   }
@@ -50,11 +55,11 @@ class Blockchain {
    */
   addTransaction(transaction) {
     if (!transaction.fromAddress || !transaction.toAddress) {
-      throw new Error('Transaction must include from and to address');
+      throw new Error('La transacción debe incluir desde y hacia la dirección de envio');
     }
     // Verify the transactiion
     if (!transaction.isValid()) {
-      throw new Error('Cannot add invalid transaction to chain');
+      throw new Error('No se puede agregar una transacción no valida a la Blockchain');
     }
     this.pendingTransactions.push(transaction);
   }
@@ -125,16 +130,16 @@ class Blockchain {
         return false;
       }
       if (currentBlock.previousHash !== previousBlock.calculateHash()) {
-        console.log('the has not corresponding the last block');
+        console.log('El codigo Hash no corresponde al bloque anterior de la blockchain');
         return false;
       }
     }
-    console.log('data mining correct');
+    console.log('Se mino correctamente');
     return true;
   }
 
   print() {
-    this.chain.forEach((block) => console.log(`${JSON.stringify(block)} \n`));
+    this.chain.forEach((block) => console.log(block));
   }
 }
 

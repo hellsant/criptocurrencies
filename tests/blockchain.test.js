@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { Blockchain, Transaction } = require('../src/blockchain');
+const { Blockchain } = require('../src/blockchains/Blockchain');
 const { createSignedTx, signingKey, createBlockchainWithTx } = require('./helpers');
 
 let blockchain = null;
@@ -11,7 +11,7 @@ beforeEach(function() {
 describe('Blockchain class', function() {
     describe('Constructor', function() {
         it('should properly initialize fields', function() {
-        	assert.equal(blockchain.difficulty, 2);
+        	assert.equal(blockchain.difficulty, 3);
         	assert.deepEqual(blockchain.pendingTransactions, []);
         	assert.equal(blockchain.miningReward, 100);
         });

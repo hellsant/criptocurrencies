@@ -10,7 +10,7 @@ const privateKey = key.getPrivate('hex');
 
 // Print the keys to the console
 console.log();
-console.log('Your public key (also your wallet address, freely shareable)\n', publicKey);
+console.log('La clave pública (también su dirección de cartera, libremente compartible)\n', publicKey);
 
 console.log();
-console.log('Your private key (keep this secret! To sign transactions)\n', privateKey);
+console.log('Su clave privada (mantenga este secreto! Para firmar transacciones)\n', privateKey);

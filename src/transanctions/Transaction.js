@@ -36,7 +36,7 @@ class Transaction {
     // You can only send a transaction from the wallet that is linked to your
     // key. So here we check if the fromAddress matches your publicKey
     if (signingKey.getPublic('hex') !== this.fromAddress) {
-      throw new Error('You cannot sign transactions for other wallets!');
+      throw new Error('No puedes firmar transacciones para otras carteras!');
     }
     // Calculate the hash of this transaction, sign it with the key
     // and store it inside the transaction obect
@@ -58,7 +58,7 @@ class Transaction {
     if (this.fromAddress === null)
       return true;
     if (!this.signature || this.signature.length === 0) {
-      throw new Error('No signature in this transaction');
+      throw new Error('No hay ninguna firma en esta transacción');
     }
     const publicKey = ec.keyFromPublic(this.fromAddress, 'hex');
     return publicKey.verify(this.calculateHash(), this.signature);

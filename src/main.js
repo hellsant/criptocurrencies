@@ -25,6 +25,7 @@ tx2.signTransaction(myKey);
 savjeeCoin.addTransaction(tx2);
 // Mine block
 savjeeCoin.minePendingTransactions(myWalletAddress);
+savjeeCoin.print();
 
 console.log();
 console.log(`Balance of xavier is ${savjeeCoin.getBalanceOfAddress(myWalletAddress)}`);
@@ -34,5 +35,4 @@ console.log(`Balance of xavier is ${savjeeCoin.getBalanceOfAddress(myWalletAddre
 
 // Check if the chain is valid
 console.log();
-console.log('Blockchain valid?', savjeeCoin.isChainValid() ? 'Yes' : 'No');
-savjeeCoin.print();
+console.log('¿Blockchain es valido?', savjeeCoin.isChainValid() ? 'si' : 'no');

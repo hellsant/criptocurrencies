@@ -5,7 +5,7 @@ const { createSignedTx } = require('./helpers');
 let blockObj = null;
 
 beforeEach(function() {
-    blockObj = new Block(1000, [createSignedTx()], 'a1');
+    blockObj = new Block(1, 1000, [createSignedTx()], 'a1');
 });
 
 describe('Block class', function() {
@@ -21,11 +21,11 @@ describe('Block class', function() {
     describe('Calculate hash', function() {
         it('should correct calculate the SHA256', function() {
             blockObj.timestamp = 1;
-            blockObj.mineBlock(1);
+            blockObj.mineBlock(3);
 
             assert.equal(
                 blockObj.hash,
-                '07d2992ddfcb8d538075fea2a6a33e7fb546c18038ae1a8c0214067ed66dc393'
+                '000e45d9b4159ca89f9ab2a9a736a564769fc90e7a032d7dd1ad3edb27e7d271aaaead092efe472b8f30150f554caf36887e1bbaf33f1836e93d988e78b989e9'
             );
         });
 
