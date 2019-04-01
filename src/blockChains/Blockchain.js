@@ -36,16 +36,12 @@ class Blockchain {
   minePendingTransactions(miningRewardAddress) {
     let rewardTx = new Transaction(null, miningRewardAddress, this.miningReward);
     this.pendingTransactions.push(rewardTx);
-
     let block = new Block(this.getLatestBlock().index + 1, Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
     block.mineBlock(this.difficulty);
-    
-    console.log('se minaron las transacciones correctamente');
-
     this.chain.push(block);
     this.pendingTransactions = [];
   }
-
+  
   /**
    * Add a new transaction to the list of pending transactions (to be added
    * next time the mining process starts). This verifies that the given
@@ -138,6 +134,23 @@ class Blockchain {
     return true;
   }
 
+  /**
+   * Replace the blockchain for a new one
+   * @param newChain
+   */
+  replaceChain (newChain) {
+    this.chain = newChain
+    this.chain[this.chain.length - 1]
+  }
+
+  /**
+   * Returns the whole blockchain
+   * @return {Array<BrewBlock>}
+   */
+  getChain () {
+    return this.chain
+  }
+  
   print() {
     this.chain.forEach((block) => console.log(block));
   }

@@ -37,7 +37,6 @@ class Block {
       this.nonce++;
       this.hash = this.calculateHash();
     }
-    console.log(`Bloque minado: ${this.hash}\nCantidad de iteraciones: ${this.nonce}\ncon indice ${this.index}\n`);
   }
 
   /**
