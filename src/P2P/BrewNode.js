@@ -64,9 +64,6 @@ class BrewNode {
    */
   processedRecievedChain(blocks) {
     let newChain = blocks.sort((block1, block2) => (block1.index - block2.index))
-    console.log('-------verificar------')
-    console.log(blocks)
-    console.log('-------------')
     if (newChain.length > this.chain.getChain().length && this.chain.isChainValid()) {
       this.chain.replaceChain(newChain)
       console.log('chain replaced')
@@ -89,10 +86,11 @@ class BrewNode {
     // Is claiming to be the next in the chain
     if (block.previousHash === currentTopBlock.hash) {
       // Attempt the top block to our chain
-      this.chain.minePendingTransactions(block)
-
+      block.transactions.forEach(toAdd => {
+        this.chain.minePendingTransactions(toAdd.toAddress)
+        console.log(toAdd.toAddress)
+      });
       console.log('New block added')
-      console.log(this.chain.getLatestBlock())
     } else {
       // It is ahead.. we are therefore a few behind, request the whole chain
       console.log('requesting chain')

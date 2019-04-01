@@ -130,7 +130,6 @@ class Blockchain {
         return false;
       }
     }
-    console.log('Se mino correctamente');
     return true;
   }
 
