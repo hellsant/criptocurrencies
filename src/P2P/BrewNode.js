@@ -86,10 +86,16 @@ class BrewNode {
     // Is claiming to be the next in the chain
     if (block.previousHash === currentTopBlock.hash) {
       // Attempt the top block to our chain
+      //revisar que solo reciba un valor 
+
+-----------------------
       block.transactions.forEach(toAdd => {
         this.chain.minePendingTransactions(toAdd.toAddress)
         console.log(toAdd.toAddress)
       });
+
+------------------
+      
       console.log('New block added')
     } else {
       // It is ahead.. we are therefore a few behind, request the whole chain
